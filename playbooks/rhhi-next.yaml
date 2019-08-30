@@ -1,0 +1,17 @@
+---
+- hosts: provisioning
+  become: yes
+  vars:
+    metadata:
+      name: RHHI.Next Installation
+      description: >
+        Check several prerequisites on a RHHI.Next provisioning host 
+      groups:
+        - rhhi-next
+    provisioning_mtu_size: 9000
+    baremetal_mtu_size: 1500
+    provisioning_ip_address: 172.22.0.1
+    provisioning_slave: eno1
+    baremetal_slave: eno2
+  roles:
+    - rhhi-next
