@@ -1,0 +1,46 @@
+#jinja2:lstrip_blocks: True
+
+
+# Provisioning bridge
+
+{% if not ansible_provisioning or ansible_provisioning.type != "bridge" %}
+  The `provisioning` interface does not exist or is not of type 'bridge'
+{% else %}
+  {% if ansible_provisioning.mtu != provisioning_mtu_size %}
+  - WARNING: The provisioning bridge has an mtu size of {{ ansible_provisioning.mtu }} but should be set to {{ provisioning_mtu_size }}.
+  {% else %}
+  - The provisioning bridge is set up with the correct mtu size ({{ provisioning_mtu_size }}).
+  {% endif %}
+  {%- if provisioning_slave not in ansible_provisioning.interfaces %}
+  - WARNING: The {{ provisioning_slave }} interface must have the provisioning interface as its master.
+  {% else %}
+  - The {{ provisioning_slave }} interface has the provisioning interface as its master.
+  {% endif %}
+  {% if ansible_provisioning.ipv4.address != provisioning_ip_address %}
+  - WARNING: The provisioning bridge must have the IP address {{ provisioning_ip_address }}.
+  {% else %}
+  - The provisioning bridge has the correct IP address ({{ provisioning_ip_address }}).
+  {% endif %}
+{% endif %}
+
+# Baremetal bridge
+
+{% if not ansible_baremetal or ansible_baremetal.type != "bridge" %}
+  The `baremetal` interface does not exist or is not of type 'bridge'
+{% else %}
+  {% if ansible_baremetal.mtu != baremetal_mtu_size %}
+  - WARNING: The baremetal bridge has an mtu size of {{ ansible_baremetal.mtu }} but should be set to {{ baremetal_mtu_size }}.
+  {% else %}
+  - The baremetal bridge is set up with the correct mtu size ({{ baremetal_mtu_size }}).
+  {% endif %}
+  {% if baremetal_slave not in ansible_baremetal.interfaces %}
+  - WARNING: The {{ baremetal_slave }} interface must have the baremetal interface as its master.
+  {% else %}
+  - The {{ baremetal_slave }} interface has the baremetal interface as its master.
+  {% endif %}
+{% endif %}
+
+# DHCP offer
+
+  - The IP offered is: {{ ip_offered.stdout }}
+
