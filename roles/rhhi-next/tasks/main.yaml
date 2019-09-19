@@ -15,6 +15,6 @@
     set_fact:
       report_msg: |
         {{ lookup('template', '../templates/report_msg.j2') }}
-  - name: Output report
+  - name: Show RHHI.Next validations result 
     warn:
       msg: "{{ report_msg }}"
