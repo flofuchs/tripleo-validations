@@ -29,7 +29,7 @@ Message: {}
 """
 
 WARNING_TEMPLATE = """\
-Task '{}' succeeded, but had some warnings:
+Task '{}' finished with a message:
 Host: {}
 Warnings: {}
 """
@@ -105,7 +105,6 @@ class CallbackModule(CallbackBase):
             pprint.pprint(abridged_result, indent=4)
         warnings = results.get('warnings', [])
         if warnings:
-            print("Warnings:")
             for warning in warnings:
                 self._display.display("* %s " % warning, color=C.COLOR_WARN)
             print("")
@@ -199,7 +198,7 @@ class CallbackModule(CallbackBase):
                         self._display.display("* %s" % host,
                                               color=C.COLOR_OK)
             else:
-                print("Success! The validation passed for all hosts:")
+                print("All validations have finished running:")
                 for host in hosts:
                     self._display.display("* %s" % host,
                                           color=C.COLOR_OK)
