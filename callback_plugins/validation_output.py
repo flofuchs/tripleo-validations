@@ -31,7 +31,7 @@ Message: {}
 WARNING_TEMPLATE = """\
 Task '{}' finished with a message:
 Host: {}
-Warnings: {}
+{}
 """
 
 DEBUG_TEMPLATE = """\
