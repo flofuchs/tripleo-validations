@@ -1,6 +1,5 @@
 #jinja2:lstrip_blocks: True
 
-
 # Provisioning bridge
 
 {% if not ansible_provisioning or ansible_provisioning.type != "bridge" %}
@@ -39,8 +38,8 @@
   - The {{ baremetal_slave }} interface has the baremetal interface as its master.
   {% endif %}
 {% endif %}
-
+{# 
 # DHCP offer for baremetal bridge
 
   - The IP offered is: {{ ip_offered.stdout }}
-
+#}

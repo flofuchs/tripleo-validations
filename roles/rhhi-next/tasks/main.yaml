@@ -1,16 +1,16 @@
 ---
-  - name: Make sure nmap is installed
-    yum:
-      name: nmap
-      state: present
-  - name: Get DHCP offer on baremetal
-    shell: 'nmap --script broadcast-dhcp-discover -e baremetal | grep "IP Offered" | sed "s/^.*\: //g"'
-    register: ip_offered
-  - name: Make sure we get an IP offer
-    assert:
-      that:
-        - "ip_offered.stdout_lines|length > 0"
-      fail_msg: "No IP was offered via DHCP"
+  #- name: Make sure nmap is installed
+  #  yum:
+  #    name: nmap
+  #    state: present
+  #- name: Get DHCP offer on baremetal
+  #  shell: 'nmap --script broadcast-dhcp-discover -e baremetal | grep "IP Offered" | sed "s/^.*\: //g"'
+  #  register: ip_offered
+  #- name: Make sure we get an IP offer
+  #  assert:
+  #    that:
+  #      - "ip_offered.stdout_lines|length > 0"
+  #    fail_msg: "No IP was offered via DHCP"
   - name: Create report
     set_fact:
       report_msg: |
